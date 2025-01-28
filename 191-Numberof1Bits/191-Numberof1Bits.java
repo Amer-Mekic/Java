@@ -3,7 +3,7 @@ class Solution {
         int res = 0;
         int rem = 0;
         while(n != 0){
-            res+=(n%2)^0;
+            res+=n%2;
             n=n/2;
         }
         return res;
