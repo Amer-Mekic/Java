@@ -1,3 +1,3 @@
 # Java
 
-## Mix of Java programs mostly from Object-Oriented Programming
+## Mix of Java programs including DSA & OOP
