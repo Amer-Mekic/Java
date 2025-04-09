@@ -1,23 +1,12 @@
-// Last updated: 10. 04. 2025. 00:00:51
+// Last updated: 10. 04. 2025. 00:13:40
 class Solution {
-    public String mergeAlternately(String word1, String word2) {
-        int i = 0;
-        int j = 0;
+    public String reverseWords(String str) {
+        String[] s = str.trim().split("\s+");
         StringBuilder sb = new StringBuilder();
-        while(i<=word1.length()-1 && j<=word2.length()-1){
-            sb.append(word1.charAt(i));
-            i++;
-            sb.append(word2.charAt(j));
-            j++;
+        for(int i = s.length-1; i>= 1; i--){
+            sb.append(s[i]+" ");
         }
-        while(i<=word1.length()-1){
-            sb.append(word1.charAt(i));
-            i++;
-        }
-        while(j<=word2.length()-1){
-            sb.append(word2.charAt(j));
-            j++;
-        }
+        sb.append(s[0]);
         return sb.toString();
     }
 }
