@@ -1,27 +1,18 @@
-// Last updated: 03. 05. 2025. 20:42:12
-class Solution {
-    public List<String> letterCombinations(String digits) {
-        if(digits.length()==0)
-            return new ArrayList<>();
-        String[] letters = {"abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"};
-        int[] digs = new int[digits.length()];
-        Queue<String> q = new LinkedList<>();
-        for(int i = 0; i < digits.length(); i++)
-            digs[i]=digits.charAt(i)-'0';
+// Last updated: 03. 05. 2025. 20:59:19
+/* The isBadVersion API is defined in the parent class VersionControl.
+      boolean isBadVersion(int version); */
 
-        q.add("");
-        for(int i = 0; i < digits.length(); i++){
-            System.out.println(q);
-            String letter = letters[digs[i]-2];
-            int size = q.size();
-            for(int j = 0; j < size; j++){
-                String curr = q.poll();
-                for(char ch : letter.toCharArray()){
-                    q.add(curr+ch);
-                }
-            }
+public class Solution extends VersionControl {
+    public int firstBadVersion(int n) {
+        int l = 0;
+        int r = n;
+        while(l<=r){
+            int mid = l+(r-l)/2;
+            if(isBadVersion(mid))
+                r = mid-1;
+            else
+                l = mid+1;
         }
-        System.out.println(q);
-        return new ArrayList<>(q);
+        return l;
     }
 }
