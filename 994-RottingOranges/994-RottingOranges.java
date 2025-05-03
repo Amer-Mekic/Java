@@ -1,58 +1,27 @@
-// Last updated: 03. 05. 2025. 14:45:18
+// Last updated: 03. 05. 2025. 20:42:12
 class Solution {
-    public int orangesRotting(int[][] grid) {
-        Queue<int[]> q = new LinkedList<>();
-        int oranges=0;
-        int rotten=0;
-        int mins=0;
-        boolean poss=false;
-        // 1st: count all oranges, store position of the rotten one to queue for BFS.
-        for(int i = 0; i < grid.length; i++){
-            for(int j = 0; j < grid[0].length; j++){
-                if(grid[i][j]==1 || grid[i][j]==2){
-                    oranges++;
-                }
-                if (grid[i][j]==2){
-                    poss=true;
-                    q.add(new int[]{i,j});
+    public List<String> letterCombinations(String digits) {
+        if(digits.length()==0)
+            return new ArrayList<>();
+        String[] letters = {"abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"};
+        int[] digs = new int[digits.length()];
+        Queue<String> q = new LinkedList<>();
+        for(int i = 0; i < digits.length(); i++)
+            digs[i]=digits.charAt(i)-'0';
+
+        q.add("");
+        for(int i = 0; i < digits.length(); i++){
+            System.out.println(q);
+            String letter = letters[digs[i]-2];
+            int size = q.size();
+            for(int j = 0; j < size; j++){
+                String curr = q.poll();
+                for(char ch : letter.toCharArray()){
+                    q.add(curr+ch);
                 }
             }
         }
         System.out.println(q);
-        //if no oranges at all, return 0
-        if(oranges==0)
-            return 0;
-        if(!poss)
-            return -1;
-        // BFS 
-        while(!q.isEmpty() && rotten<oranges){
-            int size=q.size();
-            // incr. rotten in each iteration
-            rotten += size;
-            if(rotten==oranges)
-                return mins;
-            mins++;
-            for(int i = 0; i<size; i++){
-                int[] position = q.peek();
-                if(position[0]+1<grid.length && grid[position[0]+1][position[1]]==1){
-                    grid[position[0]+1][position[1]]=2;
-                    q.add(new int[]{position[0]+1, position[1]});
-                }
-                if(position[0]-1>=0 && grid[position[0]-1][position[1]]==1){
-                    grid[position[0]-1][position[1]]=2;
-                    q.add(new int[]{position[0]-1, position[1]});
-                }
-                if(position[1]+1<grid[0].length && grid[position[0]][position[1]+1]==1){
-                    grid[position[0]][position[1]+1]=2;
-                    q.add(new int[]{position[0], position[1]+1});
-                }
-                if(position[1]-1>=0 && grid[position[0]][position[1]-1]==1){
-                    grid[position[0]][position[1]-1]=2;
-                    q.add(new int[]{position[0], position[1]-1});
-                }
-                q.poll();
-            }
-        }
-        return -1;
+        return new ArrayList<>(q);
     }
 }
