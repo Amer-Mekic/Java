@@ -1,4 +1,4 @@
-// Last updated: 02. 07. 2025. 16:50:08
+// Last updated: 02. 07. 2025. 16:50:27
 class Solution {
     public int mySqrt(int x) {
         if (x == 0 || x == 1) {
