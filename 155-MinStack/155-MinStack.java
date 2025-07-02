@@ -1,26 +1,24 @@
-// Last updated: 02. 07. 2025. 16:50:27
+// Last updated: 02. 07. 2025. 17:39:54
 class Solution {
-    public int mySqrt(int x) {
-        if (x == 0 || x == 1) {
-            return x;
-        }
-        
-        int left = 2;
-        int right = x / 2;
-        
-        while (left <= right) {
-            int mid = left + (right - left) / 2;
-            long result = (long)mid * mid;
-            
-            if (result == x) {
-                return mid;
-            } else if (result < x) {
-                left = mid + 1;
-            } else {
-                right = mid - 1;
+    public void sortColors(int[] nums) {
+        int l = 0;
+        int r = nums.length-1;
+        int i = 0;
+        while(i<=r){
+            if(nums[i]==0){
+                int temp = nums[l];
+                nums[l]=0;
+                l++;
+                nums[i++]=temp;
             }
+            else if(nums[i]==2){
+                int temp = nums[r];
+                nums[r]=2;
+                r--;
+                nums[i]=temp;
+            }
+            else 
+                i++;
         }
-        
-        return right;
     }
 }
